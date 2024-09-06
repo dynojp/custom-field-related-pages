@@ -1,7 +1,10 @@
 <?php
 
 /**
- * Plugin Name: 繰り返しカスタムフィールド「関連ページ」を「投稿」に追加する
+ * Plugin Name: Custom Field Related Pages
+ * Description: WordPress において無償・有償のプラグインを使わずに繰り返し可能なカスタムフィールドを実装するサンプル
+ * Author: 後藤隼人
+ * Author URI: https://dyno.design/
  */
 
 defined( 'ABSPATH' ) || exit;
