@@ -3,6 +3,7 @@
 /**
  * Plugin Name: Custom Field Related Pages
  * Description: WordPress において無償・有償のプラグインを使わずに繰り返し可能なカスタムフィールドを実装するサンプル
+ * Version: 0.1.0
  * Author: 後藤隼人
  * Author URI: https://dyno.design/
  */
