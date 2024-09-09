@@ -12,13 +12,13 @@ defined( 'ABSPATH' ) || exit;
 
 // カスタムフィールドを登録する
 add_action ( 'init', function () {
-    // カスタムフィールド `related_pages` を登録する:
-    register_post_meta( 'post', 'related_pages', [
-      'type' => 'array',
-      'single' => true,
-      'default' => [],
-    ] );
-  } );
+  // カスタムフィールド `related_pages` を登録する:
+  register_post_meta( 'post', 'related_pages', [
+    'type' => 'array',
+    'single' => true,
+    'default' => [],
+  ] );
+} );
 
 // メタボックスを追加する:
 add_action( 'add_meta_boxes', function () {
@@ -92,7 +92,7 @@ function slug_display_meta_box($post) {
   // CSS ファイルを追加:
   wp_enqueue_style( 
     'custom-field-related-pages', 
-    $assets_dir . 'custom-field-related-pages.css', 
+    $assets_dir . 'styles.css', 
     [], 
     '0.1.0' 
   );
@@ -100,7 +100,7 @@ function slug_display_meta_box($post) {
   // 「削除」と「行を追加」ボタンを機能させる JavaScript コードを追加:
   wp_enqueue_script(
     'custom-field-related-pages',
-    $assets_dir . 'custom-field-related-pages.js',
+    $assets_dir . 'script.js',
     ['jquery'],
     '0.1.0',
     true
@@ -142,10 +142,11 @@ add_action( 'save_post', function ($post_id) {
     }
   }
 
-  $old = get_post_meta( $post_id, 'related_pages', true );
+  $meta_key = 'related_pages';
+  $old = get_post_meta( $post_id, $meta_key, true );
   if ( ! empty($new) && $new != $old ) {
-    update_post_meta( $post_id, 'related_pages', $new );
+    update_post_meta( $post_id, $meta_key, $new );
   } else if ( empty($new) && $old ) {
-    delete_post_meta( $post_id, 'related_pages', $old );
+    delete_post_meta( $post_id, $meta_key, $old );
   }
 } );
