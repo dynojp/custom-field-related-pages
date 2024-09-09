@@ -36,57 +36,11 @@ add_action( 'add_meta_boxes', function () {
  * メタボックス related_pages の表示用コールバック
  */
 function slug_display_meta_box($post) {
-  $related_pages = get_post_meta( $post->ID, 'related_pages', true );
   wp_nonce_field( basename(__FILE__), 'related_pages' );
 
-  // テーブルヘッダー:
-  ?>
-<div id="custom-field-related-pages">
-  <table class="table" width="100%">
-    <thead>
-      <tr>
-        <th width="40%">ラベル</th>
-        <th width="40%">URL</th>
-        <th width="20%"></th>
-      </tr>
-    </thead>
-    <tbody>
-  <?php
-  // テーブルボディ:
-  // 保存された値がある場合
-  if ( ! empty($related_pages) ) {
-    foreach ($related_pages as $field) {
-  ?>
-      <tr>
-        <td><input type="text" name="label[]" value="<?php echo esc_attr( $field['label'] ); ?>" /></td>
-        <td><input type="text" name="url[]" value="<?php echo esc_attr( $field['url'] ); ?>" /></td>
-        <td><a class="button remove-row" href="#">削除</a></td>
-      </tr>
-  <?php 
-    }   
-  } else {
-  // 保存された値が無い場合
-  ?>
-      <tr>
-        <td><input type="text" name="label[]" /></td>
-        <td><input type="text" name="url[]" /></td>
-        <td><a class="button remove-row" href="#">削除</a></td>
-      </tr>
-  <?php 
-  } 
-  // 追加用の非表示行:
-  ?>
-      <tr class="empty-row screen-reader-text">
-        <td><input type="text" name="label[]" /></td>
-        <td><input type="text" name="url[]" /></td>
-        <td><a class="button remove-row" href="#">削除</a></td>
-      </tr>
-    </tbody>
-  </table>
-  <?php // 追加用ボタン: ?>
-  <p><a id="add-row" class="button" href="#">行を追加</a></p>
-</div>
-  <?php
+  $related_pages = get_post_meta( $post->ID, 'related_pages', true );
+  require_once plugin_dir_path(__FILE__) . 'templates/table.php';
+
   $assets_dir = plugin_dir_url( __FILE__ ) . 'assets/';
 
   // CSS ファイルを追加:
