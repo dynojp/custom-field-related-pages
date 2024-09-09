@@ -87,10 +87,12 @@ function slug_display_meta_box($post) {
   <p><a id="add-row" class="button" href="#">行を追加</a></p>
 </div>
   <?php
-  // CSSファイルを読み込む
+  $assets_dir = plugin_dir_url( __FILE__ ) . 'assets/';
+
+  // CSS ファイルを追加:
   wp_enqueue_style( 
     'custom-field-related-pages', 
-    plugin_dir_url( __FILE__ ) . 'custom-field-related-pages.css', 
+    $assets_dir . 'custom-field-related-pages.css', 
     [], 
     '0.1.0' 
   );
@@ -98,7 +100,7 @@ function slug_display_meta_box($post) {
   // 「削除」と「行を追加」ボタンを機能させる JavaScript コードを追加:
   wp_enqueue_script(
     'custom-field-related-pages',
-    plugin_dir_url( __FILE__ ) . '/custom-field-related-pages.js',
+    $assets_dir . 'custom-field-related-pages.js',
     ['jquery'],
     '0.1.0',
     true
